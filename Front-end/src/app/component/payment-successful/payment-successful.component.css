@@ -1,0 +1,52 @@
+.card {
+    box-shadow: 0 20px 27px 0 rgb(0 0 0 / 5%);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0 solid rgba(0, 0, 0, .125);
+    border-radius: 1rem;
+}
+
+.company_title {
+    margin-left: 10px;
+    font-weight: bold;
+    color: black;
+}
+
+.pay-btn {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.container{
+    margin-top: 10px;
+}
+
+.container{
+    padding: 20px;
+  }
+  body{
+    background-color: #f6f4f4;
+    font-family: 'Raleway', sans-serif;
+  }
+  .teal{
+    background-color: #ffc952 !important;
+    color: #444444 !important;
+  }
+  a{
+    color: #47b8e0 !important;
+  }
+  .message{
+    text-align: left;
+  }
+  .price1{
+      font-size: 40px;
+      font-weight: 200;
+      display: block;
+      text-align: center;
+  }
+  .ui.message p {margin: 5px;}

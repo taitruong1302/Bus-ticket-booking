@@ -1,0 +1,21 @@
+.container {
+    margin-top: 100px;
+}
+
+.seach-bill {
+    margin-bottom: 10px;
+}
+
+.search-bill-form {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.form-group {
+    display: flex;
+}
+
+.bi {
+    margin-right: 5px;
+}

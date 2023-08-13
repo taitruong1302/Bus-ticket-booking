@@ -1,0 +1,93 @@
+<div class="container" *ngIf="this.bill !== null; else paymentFail">
+    <button type="button" class="btn btn-primary" (click)="goToHome()"><i class="bi bi-arrow-left"></i>Go to Home</button>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="invoice-title">
+                        <h4 class="float-end font-size-15">Invoice #{{bill?.billId}} <span
+                                class="badge bg-success font-size-12 ms-2">{{bill?.status}}</span></h4>
+                        <div class="mb-4">
+                            <h1 class="mb-1 text-muted"><img src="../../../../assets/img/logo.png" width="30"
+                                    height="30" class="d-inline-block align-top" alt="">
+                                <span class="company_title">Dat Bus</span>
+                            </h1>
+                        </div>
+                    </div>
+                    <hr class="my-4">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="text-muted">
+                                <h5 class="font-size-16 mb-3">Billed To:</h5>
+                                <h5 class="font-size-15 mb-2">{{bill?.userName}}</h5>
+                                <p>{{bill?.userPhone}}</p>
+                            </div>
+                        </div>
+                        <!-- end col -->
+                        <div class="col-sm-6">
+                            <div class="text-muted text-sm-end">
+                                <div class="mt-4">
+                                    <h5 class="font-size-15 mb-1">Start Date:</h5>
+                                    <p>{{bill?.startDate}}</p>
+                                </div>
+                                <div class="mt-4">
+                                    <h5 class="font-size-15 mb-1">Start Time</h5>
+                                    <p>{{bill?.startTime}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end col -->
+                    </div>
+                    <!-- end row -->
+
+                    <div class="py-2">
+                        <h5 class="font-size-15">Order Summary</h5>
+
+                        <div class="table-responsive">
+                            <table class="table align-middle table-nowrap table-centered mb-0">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 70px;">No.</th>
+                                        <th>Seat No.</th>
+                                        <th>Price</th>
+                                        <th>Quantity</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead><!-- end thead -->
+                                <tbody>
+                                    <tr *ngFor="let b of bill?.seatNumber; let i = index">
+                                        <th scope="row">{{i+1}}</th>
+                                        <td>
+                                            <div>
+                                                <p class="text-muted mb-0">{{b.seatNo}}</p>
+                                            </div>
+                                        </td>
+                                        <td>$ {{b.seatPrice}}</td>
+                                        <td>1</td>
+                                        <td class="text-end">$ {{b.seatPrice}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" colspan="4" class="border-0 text-end"></th>
+                                        <td class="border-0 text-end">
+                                            <h4 class="m-0 fw-semibold">$ {{bill?.price}}</h4>
+                                        </td>
+                                    </tr>
+                                </tbody><!-- end tbody -->
+                            </table><!-- end table -->
+                        </div><!-- end table responsive -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #paymentFail>
+    <div class="container">
+        <button type="button" class="btn btn-primary" (click)="goToHome()"><i class="bi bi-arrow-left"></i>Go to Home</button>
+        <h2>Payment Fail</h2>
+        <img src="../../../assets/gif/payment-failed.gif" alt="">
+        
+    </div>
+    
+</ng-template>

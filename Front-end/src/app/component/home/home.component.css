@@ -1,0 +1,81 @@
+.container {
+    margin-top: 100px;
+}
+
+.schedule-list {
+    margin-top: 100px;
+    display: flex;
+    max-width: 100%;
+    border: 1px solid #dde2e8;
+    border-radius: 5px;
+}
+
+.bus-infor {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.bus-img {
+    max-width: 100px;
+}
+
+.bus-name {
+    font-weight: 500;
+    margin-bottom: 0;
+}
+
+.start-time {
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+.find-schedule {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.input-group-text {
+    display: flex;
+    align-items: baseline;
+    height: 100%;
+}
+
+.search-btn {
+    /* margin-bottom: -10px; */
+    margin-top: 26px;
+}
+
+.note {
+    text-align: center;
+    font-style: italic;
+    color: #6c6868;
+    margin-top: 30px;
+}
+
+.disabled-checkbox {
+    width: 100px;
+    height: 100px;
+    margin-left: 100px;
+}
+
+.ticket-booking {
+    display: flex;
+    border: 1px solid #dde2e8;
+    flex-wrap: wrap;
+}
+
+.card {
+    width: 100px;
+    margin: 10px;
+}
+
+.bi {
+    margin-right: 5px;
+}
+
+.bus-infor-title {
+    margin-top: 1px;
+}

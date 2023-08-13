@@ -1,0 +1,181 @@
+<div class="container">
+    <button class="btn btn-md btn-outline-success new-btn" (click)="openForm(newSchedule)">
+        <span class="material-symbols-outlined">
+            add
+        </span>New Schedule</button>
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Departure</th>
+                <th>Destination</th>
+                <th>Total Seat</th>
+                <th>Seat Left</th>
+                <th>Start Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let s of schedule | slice: (page-1)*pageSize : (page - 1) * pageSize + pageSize">
+                <th scope="row">{{s.scheduleId}}</th>
+                <td>{{s.startTime}}</td>
+                <td>{{s.endTime}}</td>
+                <td>{{s.departure}}</td>
+                <td>{{s.destinations}}</td>
+                <td>{{s.totalSeat}}</td>
+                <td>{{s.seatLeft}}</td>
+                <td>{{s.startDate}}</td>
+                <td>
+                    <button type="button" (click)="openEdit(editForm, s)" class="btn btn-warning"
+                        [disabled]="s.seatLeft !== s.totalSeat" ngClass=""><i class="fa fa-edit"></i>Edit</button>
+                    <button type="button" class="btn btn-danger" (click)="openDelete(deleteConfirm, s)"><i
+                            class="fa fa-remove"></i>Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <ngb-pagination [pageSize]="pageSize" [collectionSize]="collectionSize" [(page)]="page"
+        aria-label="Default pagination"></ngb-pagination>
+</div>
+
+<ng-template #newSchedule let-modal>
+    <form (ngSubmit)="addNewSchedule()" [formGroup]="createSchedule">
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">New Schedule</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="startTime">Start Date</label>
+                <div class="input-group">
+                    <input id="startDate" class="form-control" placeholder="yyyy-mm-dd" name="dp"
+                        formControlName="startDate" ngbDatepicker #d="ngbDatepicker" [(ngModel)]="model" />
+                    <button class="btn btn-outline-secondary bi bi-calendar3" (click)="d.toggle()"
+                        type="button"></button>
+                </div>
+            </div>
+            <div class="form-group">
+
+                <div class="time_picker">
+                    <div class="picker_group">
+                        <label class="date-label" for="startTime">Start Time</label>
+                        <timepicker id="startTime" formControlName="startTime" [showMeridian]="false" [minuteStep]="1">
+                        </timepicker>
+                    </div>
+                    <div class="picker_group">
+                        <label class="date-label" for="endTime">End Time</label>
+                        <timepicker id="endTime" formControlName="endTime" [showMeridian]="false" [minuteStep]="1">
+                        </timepicker>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="departure">Departure</label>
+                <div class="input-group">
+                    <input type="text" id="departure" class="form-control" name="departure" formControlName="departure">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="destination">Destination</label>
+                <div class="input-group">
+                    <input type="text" id="destination" class="form-control" name="destination"
+                        formControlName="destination">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="selectBus">Select Bus</label>
+                <div class="input-group">
+                    <select id="selectBus" class="form-control" formControlName="bus">
+                        <option *ngFor="let b of listBus" [value]="b.busId">{{b.name}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" data-dismiss="modal" class="btn btn-info">Submit</button>
+            <button type="button" class="btn btn-outline-dark" (click)="modal.close()">Cancel</button>
+        </div>
+        <!-- <span class="text-danger">{{msg}}</span> -->
+    </form>
+</ng-template>
+
+<ng-template #editForm let-modal>
+    <form (ngSubmit)="editSubmit()" [formGroup]="editScheduleForm">
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Edit Schedule</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="startTime">Start Date</label>
+                <div class="input-group">
+                    <input id="editStartDate" class="form-control" placeholder="yyyy-mm-dd" name="dp"
+                        formControlName="editStartDate" ngbDatepicker #d="ngbDatepicker" [(ngModel)]="model" />
+                    <button class="btn btn-outline-secondary bi bi-calendar3" (click)="d.toggle()"
+                        type="button"></button>
+                </div>
+            </div>
+            <div class="form-group">
+
+                <div class="time_picker">
+                    <div class="picker_group">
+                        <label class="date-label" for="startTime">Start Time</label>
+                        <timepicker id="editStartTime" formControlName="editStartTime" [showMeridian]="false"
+                            [minuteStep]="1">
+                        </timepicker>
+                    </div>
+                    <div class="picker_group">
+                        <label class="date-label" for="endTime">End Time</label>
+                        <timepicker id="editEndTime" formControlName="editEndTime" [showMeridian]="false"
+                            [minuteStep]="1">
+                        </timepicker>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="departure">Departure</label>
+                <div class="input-group">
+                    <input type="text" id="editDeparture" class="form-control" name="editDeparture"
+                        formControlName="editDeparture">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="destination">Destination</label>
+                <div class="input-group">
+                    <input type="text" id="editDestination" class="form-control" name="editDestination"
+                        formControlName="editDestination">
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" data-dismiss="modal" class="btn btn-info">Submit</button>
+            <button type="button" class="btn btn-outline-dark" (click)="modal.close()">Cancel</button>
+        </div>
+        <!-- <span class="text-danger">{{msg}}</span> -->
+    </form>
+</ng-template>
+
+<ng-template #deleteConfirm let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Confirm Delete</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <h2>Are you sure you want to delete this record.</h2>
+        <div class="text-center">
+            <button data-dismiss="modal" class="btn btn-danger" (click)="onDelete()">Yes, Delete!</button>
+        </div>
+        <div>{{msg}}</div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
+    </div>
+</ng-template>

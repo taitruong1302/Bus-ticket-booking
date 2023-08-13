@@ -1,0 +1,68 @@
+<ng-template #newBus let-modal>
+    <form [formGroup]="addNewBusForm" (ngSubmit)="addNewBus()">
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">New Bus</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="username">Name</label>
+                <div class="input-group">
+                    <input id="name" class="form-control" name="name" formControlName="name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="input-group">
+                    <input type="password" id="password" class="form-control" name="password" ngModel>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="fullname">Full Name</label>
+                <div class="input-group">
+                    <input id="fullname" class="form-control" name="fullname" ngModel>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <div class="input-group">
+                    <input id="email" class="form-control" name="email" ngModel>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <div class="input-group">
+                    <input id="phone" class="form-control" name="phone" ngModel>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="address">Address</label>
+                <div class="input-group">
+                    <textarea id="address" class="form-control" name="address" ngModel></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="departmentId">DepartmentId</label>
+                <div class="input-group">
+                    <input id="departmentId" class="form-control" name="departmentId" ngModel>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="status">Status</label>
+                <div class="input-group">
+                    <select class="form-select" name="status" id="status" ngModel>
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" data-dismiss="modal" class="btn btn-info">Submit</button>
+            <button type="button" class="btn btn-outline-dark" (click)="modal.close()">Cancel</button>
+        </div>
+        <!-- <span class="text-danger">{{msg}}</span> -->
+    </form>
+</ng-template>

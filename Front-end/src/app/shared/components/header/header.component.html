@@ -1,0 +1,61 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="customer/home">
+        <img src="../../../../assets/img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        <span class="company_title">Dat Bus</span>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav my-2 my-lg-0">
+            <li class="nav-item active">
+                <a class="nav-link" routerLinkActive="link-active" href="/customer/home"
+                    routerLink="/customer/home">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" routerLinkActive="link-active" href="/admin/bus-management"
+                    routerLink="/admin/bus-management" *ngIf="role === 'Admin'">Bus Management<span
+                        class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" routerLinkActive="link-active" href="/admin/schedule-management"
+                    routerLink="/admin/schedule-management" *ngIf="role === 'Admin'">Schedule Management<span
+                        class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" routerLinkActive="link-active" href="/admin/transaction"
+                    routerLink="/admin/transaction" *ngIf="role === 'Admin'">Transaction<span
+                        class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+        <div class="mr-auto"></div>
+        <ul class="navbar-nav my-2 my-lg-0">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-display="static"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span *ngIf="username===null">Login/Sign up</span>
+                    <span *ngIf="username!==null">{{username}}</span>
+
+                </a>
+                <div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" routerLink="/login"
+                        *ngIf="currentUrl !== '/login' && username ===null">Login</a>
+                    <a class="dropdown-item" routerLink="/register"
+                        *ngIf="currentUrl !== '/register' && username ===null">Sign up</a>
+                    <a class="dropdown-item" routerLink="/customer/change-profile"
+                        *ngIf="username !== null && role === 'User'">Change
+                        profile</a>
+                    <a class="dropdown-item" routerLink="/admin/change-profile"
+                        *ngIf="username !== null && role === 'Admin'">Change
+                        profile</a>
+                    <a class="dropdown-item" *ngIf="username !==null && role === 'User'" routerLink="/customer/transaction-history">Transcation History</a>
+                    <a class="dropdown-item" href="/login" *ngIf="username !==null" (click)="logout()">Logout</a>
+
+                </div>
+
+            </li>
+        </ul>
+    </div>
+</nav>

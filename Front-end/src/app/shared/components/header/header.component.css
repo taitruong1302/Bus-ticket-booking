@@ -1,0 +1,34 @@
+.company_title {
+    color: black;
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: x-large;
+    vertical-align: sub;
+    margin-left: 10px;
+}
+
+.navbar.bg-light {
+    background-color: #6ee8bd !important;
+}
+
+.navbar.bg-light.form-control {
+    border-radius: 4.25rem;
+}
+
+@media all and (min-width: 992px) {
+    .navbar .nav-item .dropdown-menu {
+        display: none;
+    }
+
+    .navbar .nav-item:hover .dropdown-menu {
+        display: block;
+    }
+
+    .navbar .nav-item .dropdown-menu {
+        margin-top: 0;
+    }
+}
+
+.link-active{
+    background-color: #35be8f;
+}

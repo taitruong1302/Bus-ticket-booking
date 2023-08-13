@@ -1,0 +1,109 @@
+<div class="container">
+    <button class="btn btn-md btn-outline-success new-btn" (click)="openForm(newBus)">
+        <span class="material-symbols-outlined">
+            add
+        </span>New Bus</button>
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Seat</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let bus of listBus | slice: (page-1)*pageSize : (page - 1) * pageSize + pageSize">
+                <th scope="row">{{bus.busId}}</th>
+                <td>{{bus.name}}</td>
+                <td>{{bus.seat}}</td>
+                <td>
+                    <button type="button" class="btn btn-warning" (click)="openEdit(editBus, bus)"><i
+                            class="fa fa-edit"></i>Edit</button>
+                    <button type="button" class="btn btn-danger" (click)="openDelete(deleteConfirm, bus)"><i
+                            class="fa fa-remove"></i>Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <ngb-pagination [pageSize]="pageSize" [collectionSize]="collectionSize" [(page)]="page"
+        aria-label="Default pagination"></ngb-pagination>
+</div>
+
+<ng-template #newBus let-modal>
+    <form [formGroup]="addNewBusForm" (ngSubmit)="addNewBus()">
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">New Bus</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <div class="input-group">
+                    <input id="name" class="form-control" name="name" formControlName="name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="seats">Seats</label>
+                <div class="input-group">
+                    <input type="text" id="seats" class="form-control" name="seats" formControlName="seats">
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" data-dismiss="modal" class="btn btn-info">Submit</button>
+            <button type="button" class="btn btn-outline-dark" (click)="modal.close()">Cancel</button>
+        </div>
+        <!-- <span class="text-danger">{{msg}}</span> -->
+    </form>
+</ng-template>
+
+<ng-template #editBus let-modal>
+    <form [formGroup]="editBusForm" (ngSubmit)="editBusInfo()">
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">New Bus</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <div class="input-group">
+                    <input id="name" class="form-control" name="name" formControlName="name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="seats">Seats</label>
+                <div class="input-group">
+                    <input type="text" id="seats" class="form-control" name="seats" formControlName="seats">
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" data-dismiss="modal" class="btn btn-info">Submit</button>
+            <button type="button" class="btn btn-outline-dark" (click)="modal.close()">Cancel</button>
+        </div>
+        <!-- <span class="text-danger">{{msg}}</span> -->
+    </form>
+</ng-template>
+
+<ng-template #deleteConfirm let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Confirm Delete</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <h2>Are you sure you want to delete this record.</h2>
+        <div class="text-center">
+            <button data-dismiss="modal" class="btn btn-danger" (click)="onDelete()">Yes, Delete!</button>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
+    </div>
+</ng-template>

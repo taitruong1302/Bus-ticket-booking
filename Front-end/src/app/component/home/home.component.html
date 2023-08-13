@@ -1,0 +1,88 @@
+<div class="container">
+    <div class="input-date">
+        <form class="find-schedule" [formGroup]="findScheduleForm" (submit)="getAllSchedule()">
+            <div class="form-group">
+                <label for="startTime">Start Date</label>
+                <div class="input-group">
+                    <input id="startDate" class="form-control" placeholder="yyyy-mm-dd" name="dp"
+                        formControlName="startDate" ngbDatepicker #d="ngbDatepicker"
+                        (dateSelect)="getDesAndDepByStartDate()" (input)="getDesAndDepByStartDate()" />
+                    <button class="btn btn-outline-secondary bi bi-calendar3" (click)="d.toggle()"
+                        type="button"></button>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="departure">Departure</label>
+                <div class="input-group">
+                    <select id="departure" class="form-control" formControlName="bus" formControlName="departure">
+                        <option *ngFor="let d of departure" [value]="d">{{d}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="destination">Destination</label>
+                <div class="input-group">
+                    <select id="destination" class="form-control" formControlName="destination"
+                        formControlName="destination">
+                        <option *ngFor="let des of destination" [value]="des">{{des}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <button type="submit" class="btn btn-success search-btn">Search</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="note">
+        <div *ngIf="listSchedule.length === 0 && isClicked == false">
+            <span>Select Date, Departure and Destination</span>
+        </div>
+        <div *ngIf="listSchedule.length === 0 && isClicked == true">
+            <span>Schedule not found</span>
+        </div>
+    </div>
+
+
+    <div class="book-ticket" *ngFor="let schedule of listSchedule; let i = index" id="ticketCollapseParent">
+        <div class="schedule-list">
+            <div class="bus-infor">
+                <h3 class="bus-name"><i class="bi bi-clock"></i>Start Time : {{schedule.startTime}}</h3>
+                <span class="bus-infor-title bus-name"><i class="bi bi-bus-front"></i>Bus Name:
+                    {{schedule.bus.name}}</span>
+                <span class="bus-infor-title departure"><i class="bi bi-caret-right-fill"></i>Seat Left :
+                    {{schedule.seatLeft}}</span>
+                <span class="bus-infor-title destination"><i class="bi bi-geo-alt-fill"></i>Departure:
+                    {{schedule.departure}}</span>
+                <span class="bus-infor-title departure"><i class="bi bi-geo-fill"></i>Destination:
+                    {{schedule.destinations}}</span>
+            </div>
+            <button type="button" class="btn btn-success" data-toggle="collapse"
+                [attr.data-target]="'#ticketCollapse'+i" aria-expanded="false"
+                [attr.aria-controls]="'#ticketCollapse'+i" [attr.aria-expanded]="!isCollapsed"
+                (click)="listSeatSorted(schedule.scheduleId)">
+                Select
+            </button>
+        </div>
+        <div class="collapse" id="ticketCollapse{{i}}" [attr.data-parent]="'#ticketCollapseParent'">
+            <form [formGroup]="myForm" (submit)="addTicket()">
+                <div class="ticket-booking">
+                    <div class="card" *ngFor="let seat of listSeat; let i = index">
+                        <div class="input-group-text">
+                            <label for="{{seat.seatId}}">{{seat.seatNo}}</label>
+                            <input type="checkbox" [disabled]="check(seatBookedList, seat.seatId)" [value]="seat.seatId"
+                                id="{{seat.seatId}}" (change)="onChange($event)">
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-success">Book Ticket</button>
+                <div class="alert alert-danger" role="danger" *ngIf="msg === 'Seats May Be Have Been Booked'">
+                    <span>{{msg}}</span>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

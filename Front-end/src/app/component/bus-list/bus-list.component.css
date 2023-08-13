@@ -1,0 +1,26 @@
+.btn {
+    margin-right: 10px;
+
+}
+
+.material-symbols-outlined {
+    font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 48
+}
+
+.new-btn {
+    display: flex;
+    padding-left: 6px;
+    margin-bottom: 10px;
+}
+
+.container {
+    margin-top: 10px;
+}
+
+::ng-deep ngb-modal-backdrop {
+    z-index: 1050 !important;
+}

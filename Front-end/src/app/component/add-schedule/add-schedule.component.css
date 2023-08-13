@@ -1,0 +1,26 @@
+.container {
+    margin-top: 100px;
+}
+
+
+.date {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    max-width: 50%;
+    justify-content: space-between;
+}
+
+.date-label {
+    margin-right: 10px;
+    margin-bottom: 0;
+}
+
+.picker_group {
+    display: flex;
+    align-items: center;
+}
+
+mat-form-field {
+    width: 100%;
+}

@@ -1,0 +1,53 @@
+<div class="container">
+    <div class="search-section">
+        <form class="search-bill-form" [formGroup]="searchBillForm">
+            <div class="form-group">
+                <input type="text" placeholder="Search Bill Id" class="seach-bill form-control" (input)="searchBill()"
+                    formControlName="billId">
+            </div>
+            <div class="form-group">
+                <input id="startDate" class="form-control" placeholder="yyyy-mm-dd" name="dp"
+                    formControlName="startDate" ngbDatepicker #d="ngbDatepicker" (dateSelect)="searchBillByDate()"
+                    (input)="searchBillByDate()" />
+                <button class="btn btn-outline-secondary bi bi-calendar3" (click)="d.toggle()" type="button"></button>
+            </div>
+        </form>
+
+    </div>
+
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Bill Id</th>
+                <th>Start Date</th>
+                <th>Start Time</th>
+                <th>Departure</th>
+                <th>Destination</th>
+                <th>User</th>
+                <th>Phone Number</th>
+                <th>Bus Name</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let bill of listBill | slice: (page-1)*pageSize : (page - 1) * pageSize + pageSize">
+                <th scope="row">{{bill.billId}}</th>
+                <td>{{bill.startDate}}</td>
+                <td>{{bill.startTime}}</td>
+                <td>{{bill.departure}}</td>
+                <td>{{bill.destination}}</td>
+                <td>{{bill.userName}}</td>
+                <td>{{bill.userPhone}}</td>
+                <td>{{bill.busName}}</td>
+                <td>{{bill.status}}</td>
+                <td>
+                    <button type="button" (click)="openDetail(bill)" class="btn btn-primary" ngClass=""><i
+                            class="bi bi-info-circle"></i>Detail</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <ngb-pagination [pageSize]="pageSize" [collectionSize]="collectionSize" [(page)]="page"
+        aria-label="Default pagination"></ngb-pagination>
+</div>

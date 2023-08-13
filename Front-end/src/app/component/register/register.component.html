@@ -1,0 +1,90 @@
+<app-header></app-header>
+<div class="container-fluid">
+    <div class="row main-content bg-success text-center">
+        <div class="col-md-4 text-center company__info">
+            <span class="company__logo">
+                <img class="container" src="./../../../assets/img/logo.png" alt="">
+            </span>
+
+            <h4 class="company_title">Dat Bus</h4>
+        </div>
+        <div class="col-md-8 col-xs-12 col-sm-12 login_form ">
+            <div class="container-fluid">
+                <div class="login-title">
+                    <h2>Register</h2>
+                </div>
+                <div class="">
+                    <form class="form-group" [formGroup]="registerForm" (ngSubmit)="addNewCustomer()">
+                        <div class="row">
+                            <input type="text" name="username" id="username" class="form__input" placeholder="Username"
+                                formControlName="username">
+                            <div *ngIf="getControl('username')?.errors && getControl('username')?.touched">
+                                <span class="text-danger" *ngIf="getControl('username')?.errors?.['required']">*Username
+                                    is required</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <input type="password" name="password" id="password" class="form__input"
+                                placeholder="Password" formControlName="password">
+                            <div *ngIf="getControl('password')?.errors && getControl('password')?.touched">
+                                <span class="text-danger" *ngIf="getControl('password')?.errors?.['required']">*Confirm
+                                    Password is required</span>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <input type="password" name="confirmPassword" id="confirmPassword" class="form__input"
+                                placeholder="Confirm Password" formControlName="confirmPassword">
+                            <div
+                                *ngIf="getControl('confirmPassword')?.errors && getControl('confirmPassword')?.touched">
+                                <span class="text-danger"
+                                    *ngIf="getControl('confirmPassword')?.errors?.['required']">*Password is
+                                    required</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <input type="text" name="phoneNumber" id="phoneNumber" class="form__input"
+                                placeholder="Phone Number" formControlName="phoneNumber" maxlength="12">
+                            <div *ngIf="getControl('phoneNumber')?.errors && getControl('phoneNumber')?.touched">
+                                <span class="text-danger" *ngIf="getControl('phoneNumber')?.errors?.['required']">*Phone
+                                    number
+                                    is required</span>
+                                <span class="text-danger" *ngIf="getControl('phoneNumber')?.errors?.['pattern']">*Phone
+                                    number
+                                    must be a number</span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <input type="text" name="email" id="email" class="form__input" placeholder="Email"
+                                formControlName="email">
+                            <div *ngIf="getControl('email')?.errors && getControl('email')?.touched">
+                                <span class="text-danger" *ngIf="getControl('email')?.errors?.['required']">*Email
+                                    is required</span>
+                                <span class="text-danger" *ngIf="getControl('email')?.errors?.['pattern']">*Email
+                                    is not a right format</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <textarea type="text" name="address" id="address" class="form__input"
+                                placeholder="Enter your address" formControlName="address"></textarea>
+                            <div *ngIf="getControl('address')?.errors && getControl('address')?.touched">
+                                <span class="text-danger" *ngIf="getControl('address')?.errors?.['required']">*Address
+                                    is required</span>
+
+                            </div>
+                        </div>
+                        <div class="msg text-danger" *ngIf="msg.length > 1">{{msg}}</div>
+                        <div class="green">
+                            <input type="submit" value="Register"
+                                [ngClass]="{'disable-btn' : registerForm.status === 'INVALID', 'btn': registerForm.status != 'INVALID'}">
+                        </div>
+                    </form>
+                </div>
+                <div class="row">
+                    <p>Already have an account? <a routerLink="/login">Sign in</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
